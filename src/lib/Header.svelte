@@ -92,9 +92,8 @@ const menuItems = [
 
 	ul {
 		position: relative;
-		padding: 0;
+		padding:0;
 		margin: 0;
-		height: 3em;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -113,6 +112,7 @@ const menuItems = [
 	ul li:hover ul {
 		position: absolute;
 		display:block;
+		height: auto;
 	}
 
 	li[aria-current='page']::before {
@@ -129,9 +129,8 @@ const menuItems = [
 
 	nav a {
 		display: flex;
-		height: 100%;
 		align-items: center;
-		padding: 0 0.5rem;
+		padding: 1rem 0.5rem;
 		color: var(--color-text);
 		font-weight: 700;
 		font-size: 0.8rem;
