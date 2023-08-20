@@ -2,7 +2,7 @@
 	export let form;
 </script>
 
-{#if form?.success}
+{#if form?.returnData?.result.success}
 	<p>Başarılı</p>
 {:else}
 	<form method="POST" action="?/formSend">

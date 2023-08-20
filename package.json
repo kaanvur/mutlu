@@ -26,7 +26,4 @@
 		"vite": "^4.4.2"
 	},
 	"type": "module",
-	"dependencies": {
-		"googleapis": "^124.0.0"
-	}
 }
