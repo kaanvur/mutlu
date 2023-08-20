@@ -28,7 +28,7 @@ export const actions = {
 
         if (Object.keys(errors).length === 0) {
             const returnData = await sendData(formData);
-            return {returnData: returnData};
+            return returnData;
         } else {
             return {
                 errors,
