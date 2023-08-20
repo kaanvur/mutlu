@@ -1,7 +1,10 @@
 <script>
 	export let form;
 </script>
-
+<svelte:head>
+	<title>İletişim</title>
+	<meta name="description" content="Svelte demo app" />
+</svelte:head>
 {#if form?.returnData?.result.success}
 	<p>Başarılı</p>
 {:else}
