@@ -1,24 +1,20 @@
 
-import { API_KEY, SPREADSHEET_ID } from '$env/static/private';
+// import { API_KEY, SPREADSHEET_ID } from '$env/static/private';
 
-export async function fetchData(page, rowNumber = 0, howMayRow = 0) {
+export async function fetchData(page) {
   try {
-    if (rowNumber) {
-      rowNumber = Number(rowNumber) + 1;
-      page = `${page}!A${rowNumber}:Z${rowNumber + howMayRow}`
-    }
-    /* const response = await fetch('https://script.google.com/macros/s/AKfycbxzzqCwkF_uUWH94O8_YoXI4y8eKp7XWNoVicx9LWpkDQ6Fpf4HJQ7fqxIJQjDwidONww/exec?sheetName=' + encodeURIComponent(page));
+    const response = await fetch('https://script.google.com/macros/s/AKfycbxzzqCwkF_uUWH94O8_YoXI4y8eKp7XWNoVicx9LWpkDQ6Fpf4HJQ7fqxIJQjDwidONww/exec?sheetName=' + encodeURIComponent(page));
     const data = await response.json();
     return data;
   } catch (error) {
     console.error('Hata oluştu:', error);
-  } */
-  const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${page}?key=${API_KEY}`);
+  }
+  /* const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${page}?key=${API_KEY}`);
   const data = await response.json();
   return manipulateData(data.values);
 } catch (error) {
   console.error('Hata oluştu:', error);
-}
+} */
 }
 
 function manipulateData(originalData) {
@@ -41,7 +37,7 @@ function manipulateData(originalData) {
 
 export async function sendData(formValues) {
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbycAd85XGkXrhemUZVNqr-orjEW5evczB6UUMDJXpLWylMfhwmjVQT6MjBCgEZSHr1drg/exec", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbxzzqCwkF_uUWH94O8_YoXI4y8eKp7XWNoVicx9LWpkDQ6Fpf4HJQ7fqxIJQjDwidONww/exec", {
       method: "POST",
       body: formValues,
     });

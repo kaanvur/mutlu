@@ -2,9 +2,8 @@
 	import Slider from '$lib/Slider.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
-  import Images from '$lib/imageView.svelte'
-  export let data;
-
+	import Images from '$lib/imageView.svelte';
+	export let data;
 </script>
 
 <svelte:head>
@@ -19,18 +18,24 @@
 				<img src={welcome_fallback} alt="Welcome" />
 			</picture>
 		</span>
-
 	</h1>
-
-
-	<Slider data={data.sliderData}/>
+{#if data}
+<Slider data={data.sliderData} />
+{:else}
+  <p>Loading...</p>
+{/if}
 </section>
-<div class="image-container">{#if data.filteredData.length > 0}
-    {#each data.filteredData as image, i}
-      <Images {image}/>
-    {/each}
-  {/if}
+{#if data}
+<div class="image-container">
+	{#if data.filteredData.length > 0}
+		{#each data.filteredData as image, i}
+			<Images {image} />
+		{/each}
+	{/if}
 </div>
+{:else}
+  <p>Loading...</p>
+{/if}
 
 <style>
 	section {
@@ -62,6 +67,6 @@
 	}
 	.image-container {
 		display: flex;
-    overflow: auto;
+		overflow: auto;
 	}
 </style>
