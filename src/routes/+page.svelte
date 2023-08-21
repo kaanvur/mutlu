@@ -27,7 +27,7 @@
 </section>
 {#if data}
 <div class="image-container">
-	{#if data.filteredData.length > 0}
+	{#if data.filteredData}
 		{#each data.filteredData as image, i}
 			<Images {image} />
 		{/each}
