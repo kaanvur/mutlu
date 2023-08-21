@@ -6,10 +6,6 @@ export const actions = {
         const email = data.get('email');
         const title = data.get('title');
         const message = data.get('message');
-        let formData = new FormData();
-        formData.append('email', email);
-        formData.append('title', title);
-        formData.append('message', message);
         const errors = {};
 
         if (!email) {
@@ -27,7 +23,7 @@ export const actions = {
         }
 
         if (Object.keys(errors).length === 0) {
-            const returnData = await sendData(formData);
+            const returnData = await sendData(data);
             return returnData;
         } else {
             return {
