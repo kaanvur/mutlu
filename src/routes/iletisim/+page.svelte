@@ -1,6 +1,7 @@
 <script>
 	export let form;
 </script>
+
 <svelte:head>
 	<title>İletişim</title>
 	<meta name="description" content="Svelte demo app" />

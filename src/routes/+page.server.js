@@ -1,14 +1,14 @@
 import { fetchData } from '$lib/SpreadsheetService';
 
-export async function load() {
-    let jsonData = [];
+export async function load({ params }) {
     let filteredData = [];
-    jsonData = await fetchData('images');
-    filteredData = jsonData.filter(item => item.category === '');
+    filteredData = fetchData('images').then(data => data.filter(item => item.category === ''));
     let sliderData = [];
-    sliderData = await fetchData('slider');
+    sliderData = fetchData('slider');
     return {
-        filteredData: filteredData,
-        sliderData:sliderData,
+        streamed: {
+            filteredData: filteredData,
+            sliderData: sliderData
+        }
     }
 }

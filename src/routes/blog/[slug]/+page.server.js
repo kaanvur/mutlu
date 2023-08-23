@@ -22,13 +22,8 @@ import { fetchData } from '$lib/SpreadsheetService';
 import { error } from '@sveltejs/kit';
 
 export async function load({ params }) {
-    let blogData = await fetchData('blogDetay');
-
-    blogData = [blogData[params.slug.split('-')[1]]];
-	if (blogData[0] == undefined) {
-		throw error(404, 'Not found here');
-	}
-	const manipulatedData = blogData.map((entry) => {
+	const slug = params.slug;
+	let blogData = fetchData('blogDetay').then(data => data = [data[slug.split('-')[1]]]).then(data => data.map((entry) => {
 		const images = [];
 		for (let i = 1; entry[`images${i}`]; i++) {
 			images.push({ url: entry[`images${i}`] });
@@ -37,11 +32,19 @@ export async function load({ params }) {
 			content: entry.content,
 			images: images
 		};
-	});
+	}));
+
+
+	/* if (blogData[0] == undefined) {
+		throw error(404, 'Not found here');
+	} */
+
 	if (params.slug) {
 		return {
-			category: params.slug,
-			content: manipulatedData
+			streamed: {
+				category: params.slug,
+				content: blogData
+			}
 		};
 	}
 }

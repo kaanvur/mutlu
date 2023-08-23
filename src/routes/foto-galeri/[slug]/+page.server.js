@@ -11,26 +11,26 @@
 
 // export const prerender = true;
 import { fetchData } from '$lib/SpreadsheetService';
-import { error } from '@sveltejs/kit';
+// import { error } from '@sveltejs/kit';
 
 export async function load({ params }) {
-    let jsonData = await fetchData('images');
-    let filteredData = jsonData.filter((item) => {
-        return replaceTurkishCharacters(item.category) == params.slug;
-    });
+	let filteredData = fetchData('images').then(data => data.filter((item) => {
+		return replaceTurkishCharacters(item.category) == params.slug;
+	}));
 
-	if (filteredData[0] == undefined) {
-		throw error(404, 'Not found here');
-	}
-	if (params.slug) {
+/* 		if (filteredData[0] == undefined) {
+			throw error(404, 'Not found here');
+		} */
+	if(params.slug) {
 		return {
-			category: filteredData[0].category,
-			content: filteredData
+			streamed: {
+				filteredData
+			}
 		};
 	}
 }
 function replaceTurkishCharacters(text) {
-    const turkishChars = { 'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u' };
-    const cleanedText = text.toLowerCase().replace(/[çğıöşü]/g, match => turkishChars[match]).replace(/[^\w\s]/g, "").replace(/\s+/g, "-");
-    return cleanedText;
+	const turkishChars = { 'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u' };
+	const cleanedText = text.toLowerCase().replace(/[çğıöşü]/g, match => turkishChars[match]).replace(/[^\w\s]/g, "").replace(/\s+/g, "-");
+	return cleanedText;
 }

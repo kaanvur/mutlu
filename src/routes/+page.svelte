@@ -19,23 +19,21 @@
 			</picture>
 		</span>
 	</h1>
-{#if data}
-<Slider data={data.sliderData} />
-{:else}
-  <p>Loading...</p>
-{/if}
+{#await data.streamed.sliderData}
+<p>Loading...</p>
+{:then data}
+<Slider data={data} />
+{/await}
 </section>
-{#if data}
+{#await data.streamed.filteredData}
+<p>Loading...</p>
+{:then data}
 <div class="image-container">
-	{#if data.filteredData}
-		{#each data.filteredData as image, i}
+		{#each data as image, i}
 			<Images {image} />
 		{/each}
-	{/if}
 </div>
-{:else}
-  <p>Loading...</p>
-{/if}
+{/await}
 
 <style>
 	section {
